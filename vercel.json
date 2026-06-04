@@ -1,0 +1,6 @@
+{
+  "buildCommand": "echo 'Portfolio built successfully'",
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false
+}
