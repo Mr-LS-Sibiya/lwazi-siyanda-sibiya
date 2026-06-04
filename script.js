@@ -42,13 +42,33 @@ if (document.getElementById('clock')) {
     updateClock();
 }
 
-// Password Check Function
+// Password Check Function with Multiple Users
 function checkValue() {
     let input = document.getElementById('userValue').value;
     
-    if (input === '240962411') {
+    // Multiple valid passwords for different users
+    const validPasswords = ['240962411', 'student123', 'user456'];
+    
+    if (validPasswords.includes(input)) {
+        // Log the successful login
+        const loginTime = new Date().toLocaleString();
+        const userNumber = input;
+        console.log('Login Successful - User: ' + userNumber + ', Time: ' + loginTime);
+        
+        // Store login info in localStorage for tracking
+        const loginHistory = JSON.parse(localStorage.getItem('loginHistory') || '[]');
+        loginHistory.push({
+            userNumber: userNumber,
+            loginTime: loginTime,
+            device: navigator.userAgent.substring(0, 50)
+        });
+        localStorage.setItem('loginHistory', JSON.stringify(loginHistory));
+        
+        // Redirect to portfolio
         window.location.href = 'portfolio.html';
     } else {
+        // Log failed attempt
+        console.warn('Failed Login Attempt - Input: ' + input);
         alert('Student document not available! Please enter the correct student number.');
         document.getElementById('userValue').value = '';
     }
@@ -76,3 +96,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Welcome Message
+console.log('Lwazi Siyanda Sibiya Portfolio - Mobile Responsive Website');
+console.log('Valid Student Numbers: 240962411, student123, user456');
